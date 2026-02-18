@@ -138,6 +138,53 @@ void PlayerImpl::playItem(const PlaylistRef& plref, int32_t itemIndex)
     playlistManager_->playlist_execute_default_action(playlist, itemIndex);
 }
 
+void PlayerImpl::playFile(const std::string& filePath)
+{
+    // Find or create our dedicated playlist for direct file playback
+    static const char* PLAYLIST_NAME = "Discografia";
+    t_size playlist = pfc::infinite_size;
+
+    // Look for existing playlist
+    t_size count = playlistManager_->get_playlist_count();
+    for (t_size i = 0; i < count; i++)
+    {
+        pfc::string8 name;
+        playlistManager_->playlist_get_name(i, name);
+        if (strcmp(name.get_ptr(), PLAYLIST_NAME) == 0)
+        {
+            playlist = i;
+            break;
+        }
+    }
+
+    // Create if doesn't exist
+    if (playlist == pfc::infinite_size)
+    {
+        playlist = playlistManager_->create_playlist(PLAYLIST_NAME, pfc::infinite_size, pfc::infinite_size);
+    }
+
+    // Clear the playlist
+    playlistManager_->playlist_clear(playlist);
+
+    // Create metadb handle from path (synchronous)
+    auto metadb = metadb::get();
+    metadb_handle_ptr handle = metadb->handle_create(filePath.c_str(), 0);
+
+    if (handle.is_empty())
+    {
+        throw InvalidRequestException("Could not create handle for file: " + filePath);
+    }
+
+    // Insert the handle into the playlist (synchronous)
+    pfc::list_single_ref_t<metadb_handle_ptr> items(handle);
+    bit_array_true selection;
+    playlistManager_->playlist_insert_items(playlist, 0, items, selection);
+
+    // Set as active and play
+    playlistManager_->set_active_playlist(playlist);
+    playlistManager_->playlist_execute_default_action(playlist, 0);
+}
+
 void PlayerImpl::playRandom()
 {
     playbackControl_->start(playback_control::track_command_rand);

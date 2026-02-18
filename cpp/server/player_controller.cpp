@@ -99,6 +99,12 @@ void PlayerController::playItem()
         param<int32_t>("index"));
 }
 
+void PlayerController::playFile()
+{
+    auto path = param<std::string>("path");
+    player_->playFile(path);
+}
+
 void PlayerController::playCurrent()
 {
     player_->playCurrent();
@@ -169,6 +175,7 @@ void PlayerController::defineRoutes(
     routes.post("play", &PlayerController::playCurrent);
     routes.post("play/random", &PlayerController::playRandom);
     routes.post("play/:plref/:index", &PlayerController::playItem);
+    routes.post("play/file", &PlayerController::playFile);
     routes.post("play-pause", &PlayerController::playOrPause);
     routes.post("next", &PlayerController::playNext);
     routes.post("previous", &PlayerController::playPrevious);

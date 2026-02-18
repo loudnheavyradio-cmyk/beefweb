@@ -524,6 +524,7 @@ public:
 
     virtual void playCurrent() = 0;
     virtual void playItem(const PlaylistRef& playlist, int32_t itemIndex) = 0;
+    virtual void playFile(const std::string& filePath) = 0;
     virtual void playRandom() = 0;
     virtual void playNext() = 0;
     virtual bool playNextBy(const std::string& expression) = 0;

@@ -21,6 +21,7 @@ public:
     void setState();
 
     void playItem();
+    void playFile();
     void playCurrent();
     void playNext();
     void playPrevious();

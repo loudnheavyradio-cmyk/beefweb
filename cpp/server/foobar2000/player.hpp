@@ -34,6 +34,7 @@ public:
 
     void playCurrent() override;
     void playItem(const PlaylistRef& playlist, int32_t itemIndex) override;
+    void playFile(const std::string& filePath) override;
     void playRandom() override;
     void playNext() override;
     bool playNextBy(const std::string& expression) override;
