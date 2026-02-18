@@ -213,4 +213,10 @@ void to_json(Json& json, const OutputsInfo& value)
     json["supportsMultipleOutputTypes"] = value.supportsMultipleOutputTypes;
 }
 
+void to_json(Json& json, const RawMetadataResult& value)
+{
+    json["tags"] = value.tags;
+    json["techInfo"] = value.techInfo;
+}
+
 }

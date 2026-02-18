@@ -103,6 +103,9 @@ public:
     OutputsInfo getOutputs() override;
     void setOutputDevice(const std::string& typeId, const std::string& deviceId) override;
 
+    RawMetadataResult getRawMetadata(const PlaylistRef& plref, int32_t index) override;
+    RawMetadataResult getPlayingRawMetadata() override;
+
     boost::unique_future<ArtworkResult> fetchCurrentArtwork() override;
     boost::unique_future<ArtworkResult> fetchArtwork(const ArtworkQuery& query) override;
 

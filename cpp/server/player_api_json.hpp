@@ -22,5 +22,6 @@ void to_json(Json& json, const OutputTypeInfo& value);
 void to_json(Json& json, const ActiveOutputInfo& value);
 void to_json(Json& json, const OutputsInfo& value);
 void to_json(Json& json, PlayerOption* const& value);
+void to_json(Json& json, const RawMetadataResult& value);
 
 }

@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 #include <memory>
 #include <functional>
 
@@ -438,6 +439,19 @@ struct OutputsInfo
     }
 };
 
+struct RawMetadataResult
+{
+    RawMetadataResult() = default;
+    RawMetadataResult(RawMetadataResult&&) = default;
+    RawMetadataResult& operator=(RawMetadataResult&&) = default;
+
+    // Music tags (multi-value): ARTIST -> ["Slash", "Duff", "Axl"]
+    std::map<std::string, std::vector<std::string>> tags;
+
+    // Technical info (single-value): codec -> "FLAC", samplerate -> "192000"
+    std::map<std::string, std::string> techInfo;
+};
+
 using PlayerStatePtr = std::unique_ptr<PlayerState>;
 using ColumnsQueryPtr = std::unique_ptr<ColumnsQuery>;
 using PlayerEventsCallback = std::function<void(PlayerEvents)>;
@@ -561,6 +575,20 @@ public:
     {
         (void) typeId;
         (void) deviceId;
+    }
+
+    // Raw metadata API
+
+    virtual RawMetadataResult getRawMetadata(const PlaylistRef& plref, int32_t index)
+    {
+        (void) plref;
+        (void) index;
+        return {};
+    }
+
+    virtual RawMetadataResult getPlayingRawMetadata()
+    {
+        return {};
     }
 
     // Artwork API

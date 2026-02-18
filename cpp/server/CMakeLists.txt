@@ -134,6 +134,7 @@ set(
     http.cpp http.hpp
     json.hpp
     log.cpp log.hpp
+    metadata_controller.cpp metadata_controller.hpp
     outputs_controller.cpp outputs_controller.hpp
     parsing.cpp parsing.hpp
     play_queue_controller.cpp
