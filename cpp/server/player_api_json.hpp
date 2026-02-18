@@ -23,5 +23,10 @@ void to_json(Json& json, const ActiveOutputInfo& value);
 void to_json(Json& json, const OutputsInfo& value);
 void to_json(Json& json, PlayerOption* const& value);
 void to_json(Json& json, const RawMetadataResult& value);
+void to_json(Json& json, const SourceInfo& value);
+void to_json(Json& json, const DspInfo& value);
+void to_json(Json& json, const ReplayGainInfo& value);
+void to_json(Json& json, const OutputDetailInfo& value);
+void to_json(Json& json, const SignalPathInfo& value);
 
 }

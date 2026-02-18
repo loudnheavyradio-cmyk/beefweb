@@ -106,6 +106,8 @@ public:
     RawMetadataResult getRawMetadata(const PlaylistRef& plref, int32_t index) override;
     RawMetadataResult getPlayingRawMetadata() override;
 
+    SignalPathInfo getSignalPath() override;
+
     boost::unique_future<ArtworkResult> fetchCurrentArtwork() override;
     boost::unique_future<ArtworkResult> fetchArtwork(const ArtworkQuery& query) override;
 

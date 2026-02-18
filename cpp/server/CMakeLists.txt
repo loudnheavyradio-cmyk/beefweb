@@ -136,6 +136,7 @@ set(
     log.cpp log.hpp
     metadata_controller.cpp metadata_controller.hpp
     outputs_controller.cpp outputs_controller.hpp
+    signal_path_controller.cpp signal_path_controller.hpp
     parsing.cpp parsing.hpp
     play_queue_controller.cpp
     play_queue_controller.hpp

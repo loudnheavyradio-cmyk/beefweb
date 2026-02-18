@@ -452,6 +452,59 @@ struct RawMetadataResult
     std::map<std::string, std::string> techInfo;
 };
 
+// Signal path structs
+
+struct SourceInfo
+{
+    int32_t sampleRate = 0;
+    int32_t bitDepth = 0;
+    int32_t channels = 0;
+    std::string codec;
+    int32_t bitrate = 0;
+    std::string encoding;  // "lossless" or "lossy"
+};
+
+struct DspInfo
+{
+    std::string name;
+    bool active = true;
+};
+
+struct ReplayGainInfo
+{
+    std::string sourceMode;      // "none", "track", "album", "byPlaybackOrder"
+    std::string processingMode;  // "none", "gain", "gainAndPeak", "peak"
+    float trackGain = 0.0f;
+    float trackPeak = 0.0f;
+    float albumGain = 0.0f;
+    float albumPeak = 0.0f;
+};
+
+struct OutputFormatInfo
+{
+    int32_t sampleRate = 0;
+    int32_t bitDepth = 0;
+    int32_t channels = 0;
+};
+
+struct OutputDetailInfo
+{
+    std::string device;
+    std::string backend;     // "WASAPI", "WASAPI (event)", "DS", "ASIO"
+    bool exclusive = false;
+    double bufferLength = 0.0;
+    int32_t configBitDepth = 0;
+    bool useDither = false;
+};
+
+struct SignalPathInfo
+{
+    SourceInfo source;
+    std::vector<DspInfo> dspChain;
+    ReplayGainInfo replayGain;
+    OutputDetailInfo output;
+};
+
 using PlayerStatePtr = std::unique_ptr<PlayerState>;
 using ColumnsQueryPtr = std::unique_ptr<ColumnsQuery>;
 using PlayerEventsCallback = std::function<void(PlayerEvents)>;
@@ -587,6 +640,13 @@ public:
     }
 
     virtual RawMetadataResult getPlayingRawMetadata()
+    {
+        return {};
+    }
+
+    // Signal path API
+
+    virtual SignalPathInfo getSignalPath()
     {
         return {};
     }

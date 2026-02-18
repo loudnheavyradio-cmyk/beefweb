@@ -219,4 +219,48 @@ void to_json(Json& json, const RawMetadataResult& value)
     json["techInfo"] = value.techInfo;
 }
 
+void to_json(Json& json, const SourceInfo& value)
+{
+    json["sampleRate"] = value.sampleRate;
+    json["bitDepth"] = value.bitDepth;
+    json["channels"] = value.channels;
+    json["codec"] = value.codec;
+    json["bitrate"] = value.bitrate;
+    json["encoding"] = value.encoding;
+}
+
+void to_json(Json& json, const DspInfo& value)
+{
+    json["name"] = value.name;
+    json["active"] = value.active;
+}
+
+void to_json(Json& json, const ReplayGainInfo& value)
+{
+    json["sourceMode"] = value.sourceMode;
+    json["processingMode"] = value.processingMode;
+    json["trackGain"] = value.trackGain;
+    json["trackPeak"] = value.trackPeak;
+    json["albumGain"] = value.albumGain;
+    json["albumPeak"] = value.albumPeak;
+}
+
+void to_json(Json& json, const OutputDetailInfo& value)
+{
+    json["device"] = value.device;
+    json["backend"] = value.backend;
+    json["exclusive"] = value.exclusive;
+    json["bufferLength"] = value.bufferLength;
+    json["configBitDepth"] = value.configBitDepth;
+    json["useDither"] = value.useDither;
+}
+
+void to_json(Json& json, const SignalPathInfo& value)
+{
+    json["source"] = value.source;
+    json["dspChain"] = value.dspChain;
+    json["replayGain"] = value.replayGain;
+    json["output"] = value.output;
+}
+
 }

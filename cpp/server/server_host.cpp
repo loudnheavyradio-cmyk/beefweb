@@ -13,6 +13,7 @@
 #include "client_config_controller.hpp"
 #include "outputs_controller.hpp"
 #include "metadata_controller.hpp"
+#include "signal_path_controller.hpp"
 #include "log.hpp"
 
 namespace msrv {
@@ -61,6 +62,7 @@ void ServerHost::reconfigure(SettingsDataPtr settings)
     PlayQueueController::defineRoutes(router, playerQueue, player_);
     OutputsController::defineRoutes(router, playerQueue, player_, settings);
     MetadataController::defineRoutes(router, playerQueue, player_, settings);
+    SignalPathController::defineRoutes(router, playerQueue, player_);
     QueryController::defineRoutes(router, playerQueue, player_, &dispatcher_, settings);
     ArtworkController::defineRoutes(router, playerQueue, player_, contentTypes_);
 
